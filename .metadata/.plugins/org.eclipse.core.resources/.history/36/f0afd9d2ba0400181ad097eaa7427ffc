@@ -1,0 +1,60 @@
+package com.app.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "Domains")
+public class Domains {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@Column(name = "Id")
+	private String id;
+
+	@Column(name = "Name")
+	private String name;
+
+	@Column(name = "VP")
+	private String vp;
+
+	public Domains() {
+
+	}
+
+	public Domains(String id, String name, String vp) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.vp = vp;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getVp() {
+		return vp;
+	}
+
+	public void setVp(String vp) {
+		this.vp = vp;
+	}
+
+}

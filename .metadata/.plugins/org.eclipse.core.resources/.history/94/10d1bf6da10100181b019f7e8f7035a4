@@ -1,0 +1,15 @@
+package com.app.path;
+
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+
+public class Server implements EmbeddedServletContainerCustomizer {
+
+	@Override
+	public void customize(ConfigurableEmbeddedServletContainer server) {
+		server.setContextPath("/SpringApp");
+
+		
+	}
+
+}

@@ -1,0 +1,19 @@
+package com.app.model;
+
+public class Domains {
+	private String id;
+	private String name;
+	private String vp;
+
+	public Domains() {
+
+	}
+
+	public Domains(String id, String name, String vp) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.vp = vp;
+	}
+
+}

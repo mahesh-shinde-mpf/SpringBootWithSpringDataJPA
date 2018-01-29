@@ -1,0 +1,57 @@
+package com.app.model;
+
+import java.util.Date;
+
+public class Company {
+
+	
+	private Long id;
+	private String name;
+	private String city;
+	private Date establishedDate;
+
+	public Company() {
+		super();
+	}
+
+	public Company(Long id, String name, String city, Date establishedDate) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.city = city;
+		this.establishedDate = establishedDate;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public Date getEstablishedDate() {
+		return establishedDate;
+	}
+
+	public void setEstablishedDate(Date establishedDate) {
+		this.establishedDate = establishedDate;
+	}
+
+}

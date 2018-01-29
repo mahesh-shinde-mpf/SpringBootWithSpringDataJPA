@@ -1,0 +1,5 @@
+package com.app.exceptionresolve;
+
+public class CompanyNotFoundException {
+
+}

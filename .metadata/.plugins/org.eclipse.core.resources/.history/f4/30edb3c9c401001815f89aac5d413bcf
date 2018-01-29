@@ -1,0 +1,103 @@
+package com.app.controller;
+
+import java.util.List;
+
+import javax.validation.Valid;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.app.exceptionresolve.CompanyNotFoundException;
+import com.app.model.Company;
+import com.app.repo.CompanyRepository;
+
+@RestController
+@RequestMapping("/company")
+public class CompanyController {
+
+	@Autowired
+	CompanyRepository repository;
+
+	@RequestMapping("/")
+	public String welcome(){
+		return "Welcome To Spring Boot Application";
+	}
+	// Add Record
+	@PostMapping("/add")
+	public Company addComapny(@Valid @RequestBody Company company) {
+		return repository.save(company);
+	}
+
+	// Retrieve Using Object Type
+	@GetMapping("get/{id}")
+	public Company getComapnyById(@PathVariable(value = "id") Long companyId) {
+		Company company = repository.findOne(companyId);
+		if (company == null) {
+			throw new CompanyNotFoundException("Invalid Company Id");
+			return null;
+		}
+		return company;
+	}
+
+	// Retrieve All Records
+	@GetMapping("/all")
+	public List<Company> getAll() {
+		return repository.findAll();
+	}
+
+	// Retrieve Using Response Entity
+	@GetMapping("/find/{id}")
+	public ResponseEntity<Company> getCompanyById(@PathVariable(value = "id") Long Id) {
+		Company company = repository.findOne(Id);
+		if (company == null) {
+			return ResponseEntity.notFound().build();
+		}
+		return ResponseEntity.ok().body(company);
+	}
+
+	// Update Records
+	@PutMapping(value = "/update/{id}")
+	public Company updateCompanyDetails(@PathVariable(value = "id") Long Id, @RequestBody Company companyUpdate) {
+		Company company = repository.findOne(Id);
+		if (company == null) {
+			return null;
+		}
+		company.setName(companyUpdate.getName());
+		company.setCity(companyUpdate.getCity());
+		Company updatedCompany = repository.save(company);
+		return updatedCompany;
+	}
+
+	// Update Using Response Entity
+	@PutMapping(value = "/modify/{id}")
+	public ResponseEntity<Company> modifyCompanyDetails(@PathVariable(value = "id") Long Id,
+			@RequestBody Company updatedDetails) {
+		Company company = repository.findOne(Id);
+		if (company == null) {
+			return ResponseEntity.notFound().build();
+		}
+		company.setCity(updatedDetails.getCity());
+		company.setName(updatedDetails.getName());
+		repository.save(company);
+		return ResponseEntity.ok().body(company);
+	}
+
+	// Delete Record
+	@DeleteMapping(value = "/delete/{id}")
+	public void deleteCompany(@PathVariable(value = "id") Long id) {
+		Company deleteCompany = repository.findOne(id);
+		if (deleteCompany == null) {
+			return;
+		}
+		repository.delete(deleteCompany);
+
+	}
+}

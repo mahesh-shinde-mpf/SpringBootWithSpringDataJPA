@@ -1,0 +1,18 @@
+package com.app.path;
+
+import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
+import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
+import org.springframework.stereotype.Component;
+
+
+@Component
+public class Server implements EmbeddedServletContainerCustomizer {
+
+	@Override
+	public void customize(ConfigurableEmbeddedServletContainer server) {
+		server.setContextPath("/SpringBootApp");
+		//server.setPort(8081);
+		
+	}
+
+}
